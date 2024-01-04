@@ -1,0 +1,14 @@
+com/bandrango/store/services/beans/OrderRequest$OrderRequestBuilder.class
+com/bandrango/store/services/beans/OrderLine$OrderLineBuilderImpl.class
+com/bandrango/store/services/beans/OrderLine$OrderLineBuilder.class
+com/bandrango/store/services/beans/OrderResponse.class
+com/bandrango/store/services/StoreService.class
+com/bandrango/store/services/beans/OrderLine.class
+com/bandrango/store/services/impl/StoreServiceImpl.class
+com/bandrango/store/services/beans/OrderLine$1.class
+com/bandrango/store/services/beans/OrderResponse$OrderResponseBuilderImpl.class
+com/bandrango/store/services/beans/OrderResponse$OrderResponseBuilder.class
+com/bandrango/store/services/beans/OrderRequest.class
+com/bandrango/store/services/beans/OrderRequest$1.class
+com/bandrango/store/services/beans/OrderResponse$1.class
+com/bandrango/store/services/beans/OrderRequest$OrderRequestBuilderImpl.class

@@ -1,0 +1,324 @@
+{
+	"info": {
+		"_postman_id": "9b3a5cd9-8c6f-4096-8b84-ff31bba87027",
+		"name": "CHAOS API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2980805"
+	},
+	"item": [
+		{
+			"name": "Exchange Rate",
+			"item": [
+				{
+					"name": "Upsert Exchange Rate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 4,\n    \"sourceCurrency\": \"EUR\",\n    \"targetCurrency\": \"USD\",\n    \"exchangeRate\": 1.18,\n    \"effectiveStartDate\": \"2023-12-20T11:00:55Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{server}}:{{port1}}/exchangerate/upsert",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"exchangerate",
+								"upsert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Exchage Rates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{server}}:{{port1}}/exchangerate/all",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"exchangerate",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Exchange Rate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{server}}:{{port1}}/exchangerate/rate?sourceCurrency=EUR&targetCurrency=GBP&effectiveStartDate=2023-12-27T11:00:55Z",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"exchangerate",
+								"rate"
+							],
+							"query": [
+								{
+									"key": "sourceCurrency",
+									"value": "EUR"
+								},
+								{
+									"key": "targetCurrency",
+									"value": "GBP"
+								},
+								{
+									"key": "effectiveStartDate",
+									"value": "2023-12-27T11:00:55Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Exchange Rate",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{server}}:{{port1}}/exchangerate/1",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port1}}",
+							"path": [
+								"exchangerate",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "Upsert Customer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 5,\n    \"basicCustomerDiscount\": 0.00,\n    \"discountAbove10000\": 5.00,\n    \"discountAbove30000\": 7.00\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{server}}:{{port2}}/store/customer/upsert",
+									"protocol": "http",
+									"host": [
+										"{{server}}"
+									],
+									"port": "{{port2}}",
+									"path": [
+										"store",
+										"customer",
+										"upsert"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{server}}:{{port2}}/store/customer/all",
+									"protocol": "http",
+									"host": [
+										"{{server}}"
+									],
+									"port": "{{port2}}",
+									"path": [
+										"store",
+										"customer",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Customer",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{server}}:{{port2}}/store/customer/5",
+									"protocol": "http",
+									"host": [
+										"{{server}}"
+									],
+									"port": "{{port2}}",
+									"path": [
+										"store",
+										"customer",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "Product Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"D\",\n    \"unitCost\": 0.60,\n    \"markup\": \"1 EUR/unit\",\n    \"promotion\": \"20% off\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{server}}:{{port2}}/store/product/upsert",
+									"protocol": "http",
+									"host": [
+										"{{server}}"
+									],
+									"port": "{{port2}}",
+									"path": [
+										"store",
+										"product",
+										"upsert"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{server}}:{{port2}}/store/product/all",
+									"protocol": "http",
+									"host": [
+										"{{server}}"
+									],
+									"port": "{{port2}}",
+									"path": [
+										"store",
+										"product",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Product",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{server}}:{{port2}}/store/product/A",
+									"protocol": "http",
+									"host": [
+										"{{server}}"
+									],
+									"port": "{{port2}}",
+									"path": [
+										"store",
+										"product",
+										"A"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerId\": 5,\n  \"orderQuantityProductA\": 10000,\n  \"orderQuantityProductB\": 0,\n  \"orderQuantityProductC\": 20000,\n  \"orderQuantityProductD\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{server}}:{{port2}}/store/order",
+							"protocol": "http",
+							"host": [
+								"{{server}}"
+							],
+							"port": "{{port2}}",
+							"path": [
+								"store",
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "localhost"
+		}
+	]
+}

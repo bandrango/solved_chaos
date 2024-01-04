@@ -1,0 +1,24 @@
+spring:
+ main:
+  allow-bean-definition-overriding: true
+  allow-circular-references: true
+ application:
+  name: exchange-rate
+ datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/chaosdb
+    username: chaostest
+    password: chaostest   
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 10
+      maximum-pool-size: 100
+      idle-timeout: 100000
+      max-lifetime: 1800000
+server:
+  port: 10680
+log:
+  directory: external/logs
+  filename: exchangerate.log
+  mode: ERROR
+  chaosmode: DEBUG

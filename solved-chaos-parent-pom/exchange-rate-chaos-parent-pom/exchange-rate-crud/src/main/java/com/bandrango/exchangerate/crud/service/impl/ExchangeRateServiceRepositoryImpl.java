@@ -27,19 +27,12 @@ public class ExchangeRateServiceRepositoryImpl implements ExchangeRateServiceRep
 	}
 
 	@Override
-	public List<ExchangeRate> findAll() {
-		return exchangeRateDao.findAll();
+	public ExchangeRate findExchangeRate(String sourceCurrency, String targetCurrency, Date effectiveStartDate) {
+		return exchangeRateDao.findExchangeRate(sourceCurrency, targetCurrency, effectiveStartDate);
 	}
 
 	@Override
-	public List<ExchangeRate> findBySourceCurrencyAndTargetCurrencyAndEffectiveDate(String sourceCurrency,
-			String targetCurrency, Date effectiveStartDate) {
-		return exchangeRateDao.findBySourceCurrencyAndTargetCurrencyAndEffectiveDate(sourceCurrency, targetCurrency,
-				effectiveStartDate);
-	}
-
-	@Override
-	public List<ExchangeRate> findBySourceCurrencyAndTargetCurrency(String sourceCurrency, String targetCurrency) {
-		return exchangeRateDao.findBySourceCurrencyAndTargetCurrency(sourceCurrency, targetCurrency);
+	public List<ExchangeRate> findExchangeRatesByEffectiveDate(Date effectiveStartDate) {
+		return exchangeRateDao.findExchangeRatesByEffectiveDate(effectiveStartDate);
 	}
 }

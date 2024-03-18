@@ -1,6 +1,6 @@
 package com.bandrango.exchangerate.services.impl;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +18,10 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 
 	@Autowired
 	ExchangeRateServiceRepository exchangeRateRepository;
-
+	
 	@Override
 	public List<ExchangeRate> getAllExchangeRates() {
-		return exchangeRateRepository.findAll();
+		return exchangeRateRepository.findExchangeRatesByEffectiveDate(new Date());
 	}
 
 	@Override
@@ -32,11 +32,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	    if (exchangeRatesMap.containsKey(directRateKey)) {
 	        return 1.0 * exchangeRatesMap.get(directRateKey);
 	    }
-
-//	    String inverseRateKey = targetCurrency + ":" + sourceCurrency;
-//	    if (exchangeRatesMap.containsKey(inverseRateKey)) {
-//	        return 1.0 / exchangeRatesMap.get(inverseRateKey);
-//	    }
 
 	    String intermediateCurrency = findIntermediateCurrency(exchangeRatesMap, sourceCurrency, targetCurrency);
 	    if (intermediateCurrency != null) {
@@ -50,33 +45,23 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 
 	public Map<String, Double> buildExchangeRatesMap(String sourceCurrency, String targetCurrency, Date effectiveStartDate) {
 	    Map<String, Double> exchangeRatesMap = new HashMap<>();
+	    List<ExchangeRate> exchangeRates = new ArrayList<>();
 
-	    List<ExchangeRate> exchangeRates = exchangeRateRepository.findBySourceCurrencyAndTargetCurrencyAndEffectiveDate(
-	            sourceCurrency, targetCurrency, effectiveStartDate);
-	    if (exchangeRates.isEmpty()) {
-	        ExchangeRate closestExchangeRate = findClosestExchangeRate(
-	                exchangeRateRepository.findBySourceCurrencyAndTargetCurrency(sourceCurrency, targetCurrency),
-	                effectiveStartDate);
-	        if (closestExchangeRate != null) {
-	        	exchangeRates.add(closestExchangeRate);
-	        }
-	    }
+		ExchangeRate exchangeRate = exchangeRateRepository.findExchangeRate(sourceCurrency, targetCurrency,
+				effectiveStartDate);
+		if (exchangeRate != null) {
+			exchangeRates.add(exchangeRate);
+		}
 
-	    if (exchangeRates.isEmpty()) {
-	        exchangeRates.addAll(exchangeRateRepository.findAll());
-	    }
+		if (exchangeRates.isEmpty()) {
+			exchangeRates.addAll(exchangeRateRepository.findExchangeRatesByEffectiveDate(effectiveStartDate));
+		}
 
 	    exchangeRates.stream()
 	            .filter(rate -> !exchangeRatesMap.containsKey(rate.getSourceCurrency() + ":" +  rate.getTargetCurrency()))
 	            .forEach(rate -> exchangeRatesMap.put(rate.getSourceCurrency() + ":" +  rate.getTargetCurrency(), rate.getExchangeRate().doubleValue()));
 
 	    return exchangeRatesMap;
-	}
-
-	private ExchangeRate findClosestExchangeRate(List<ExchangeRate> exchangeRates, Date effectiveStartDate) {
-	    return exchangeRates.stream()
-	            .min(Comparator.comparingLong(rate -> Math.abs(effectiveStartDate.getTime() - rate.getEffectiveStartDate().getTime())))
-	            .orElse(null);
 	}
 
 	private String findIntermediateCurrency(Map<String, Double> exchangeRatesMap, String sourceCurrency,
@@ -104,4 +89,5 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	public int deleteExchangeRate(Long id) {
 		return exchangeRateRepository.deleteExchangeRate(id);
 	}
+
 }

@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +16,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.bandrango.exchangerate.crud.beans.ExchangeRate;
 import com.bandrango.exchangerate.crud.dao.impl.JdbcExchangeRateDaoImpl;
+import com.bandrango.exchangerate.crud.dao.impl.util.ExchangeRateUtlis;
 
 @ExtendWith(MockitoExtension.class)
-class ExchangeRateServiceRepositoryImplTest {
+class ExchangeRateServiceRepositoryImplTest extends ExchangeRateUtlis {
 
 	@InjectMocks
 	private JdbcExchangeRateDaoImpl exchangeRateDao;
@@ -50,42 +49,27 @@ class ExchangeRateServiceRepositoryImplTest {
 	}
 
 	@Test
-	public void testFindAll() {
-		List<ExchangeRate> expectedExchangeRates = createExchangeRateList();
-		when(exchangeRateService.findAll()).thenReturn(createExchangeRateList());
-		List<ExchangeRate> actualExchangeRates = exchangeRateService.findAll();
-		assertEquals(expectedExchangeRates, actualExchangeRates);
-
-	}
-	
-	@Test
-	public void testFindBySourceCurrencyAndTargetCurrencyAndEffectiveDate() {
+	public void testFindExchangeRate() {
 		String sourceCurrency = "USD";
 		String targetCurrency = "EUR";
 		Date effectiveStartDate = new Date();
 		
-		List<ExchangeRate> expectedExchangeRates = createExchangeRateList();
-		when(exchangeRateService.findBySourceCurrencyAndTargetCurrencyAndEffectiveDate(sourceCurrency, targetCurrency, effectiveStartDate)).thenReturn(createExchangeRateList());
-		List<ExchangeRate> actualExchangeRates = exchangeRateService.findBySourceCurrencyAndTargetCurrencyAndEffectiveDate(sourceCurrency, targetCurrency, effectiveStartDate);
-		assertEquals(expectedExchangeRates.get(0).getId(), actualExchangeRates.get(0).getId());
+		ExchangeRate expectedExchangeRates = createExchangeRate();
+		when(exchangeRateService.findExchangeRate(sourceCurrency, targetCurrency, effectiveStartDate)).thenReturn(createExchangeRate());
+		ExchangeRate actualExchangeRates = exchangeRateService.findExchangeRate(sourceCurrency, targetCurrency, effectiveStartDate);
+		assertEquals(expectedExchangeRates.getId(), actualExchangeRates.getId());
 
 	}
 	
 	@Test
 	public void testFindBySourceCurrencyAndTargetCurrency() {
-		String sourceCurrency = "USD";
-		String targetCurrency = "EUR";
+		Date effectiveStartDate = new Date();
 		
 		List<ExchangeRate> expectedExchangeRates = createExchangeRateList();
-		when(exchangeRateService.findBySourceCurrencyAndTargetCurrency(sourceCurrency, targetCurrency)).thenReturn(createExchangeRateList());
-		List<ExchangeRate> actualExchangeRates = exchangeRateService.findBySourceCurrencyAndTargetCurrency(sourceCurrency, targetCurrency);
+		when(exchangeRateService.findExchangeRatesByEffectiveDate(effectiveStartDate)).thenReturn(createExchangeRateList());
+		List<ExchangeRate> actualExchangeRates = exchangeRateService.findExchangeRatesByEffectiveDate(effectiveStartDate);
 		assertEquals(expectedExchangeRates, actualExchangeRates);
 
-	}
-
-	private List<ExchangeRate> createExchangeRateList() {
-		return Arrays.asList(new ExchangeRate(1L, "USD", "EUR", new BigDecimal("1.2"), new Date()),
-				new ExchangeRate(2L, "USD", "EUR", new BigDecimal("1.3"), new Date()));
 	}
 
 }

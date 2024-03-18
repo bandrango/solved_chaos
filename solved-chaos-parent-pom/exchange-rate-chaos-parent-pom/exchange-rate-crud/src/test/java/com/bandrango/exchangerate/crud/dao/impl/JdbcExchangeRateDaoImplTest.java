@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -24,9 +22,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.bandrango.exchangerate.crud.beans.ExchangeRate;
+import com.bandrango.exchangerate.crud.dao.impl.util.ExchangeRateUtlis;
 
 @ExtendWith(MockitoExtension.class)
-class JdbcExchangeRateDaoImplTest {
+class JdbcExchangeRateDaoImplTest extends ExchangeRateUtlis {
 
 	@Mock
 	private NamedParameterJdbcTemplate jdbcTemplate;
@@ -72,67 +71,40 @@ class JdbcExchangeRateDaoImplTest {
 	}
 
 	@Test
-	void testFindAll() {
-		// Arrange
-		List<ExchangeRate> expectedExchangeRates = createExchangeRateList();
-
-		ReflectionTestUtils.setField(exchangeRateDao, "findAllQry", "findAllQry");
-
-		// Act
-		mockJdbcTemplateQuery(expectedExchangeRates);
-
-		// Assert
-		List<ExchangeRate> actualExchangeRates = exchangeRateDao.findAll();
-		assertEquals(expectedExchangeRates, actualExchangeRates);
-	}
-
-	@Test
-	void testFindBySourceCurrencyAndTargetCurrencyAndEffectiveDate() {
+	void testFindExchangeRate() {
 		// Arrange
 		String sourceCurrency = "USD";
 		String targetCurrency = "EUR";
 		Date effectiveStartDate = new Date();
-		List<ExchangeRate> expectedExchangeRates = createExchangeRateList();
+		ExchangeRate expectedExchangeRates = createExchangeRate();
 		
-		ReflectionTestUtils.setField(exchangeRateDao, "findBySourceCurrencyAndTargetCurrencyAndEffectiveDate",
-				"findBySourceCurrencyAndTargetCurrencyAndEffectiveDate");
+		ReflectionTestUtils.setField(exchangeRateDao, "findExchangeRate",
+				"findExchangeRate");
 
 		// Act
 		mockJdbcTemplateQuery(expectedExchangeRates);
 
 		// Assert
-		List<ExchangeRate> actualExchangeRates = exchangeRateDao.findBySourceCurrencyAndTargetCurrencyAndEffectiveDate(
+		ExchangeRate actualExchangeRates = exchangeRateDao.findExchangeRate(
 				sourceCurrency, targetCurrency, effectiveStartDate);
 		assertEquals(expectedExchangeRates, actualExchangeRates);
 	}
 
 	@Test
-	void testFindBySourceCurrencyAndTargetCurrency() {
+	void testFindExchangeRatesByEffectiveDate() {
 		// Arrange
-		String sourceCurrency = "USD";
-		String targetCurrency = "EUR";
+		Date effectiveStartDate = new Date();
 		List<ExchangeRate> expectedExchangeRates = createExchangeRateList();
 		
-		ReflectionTestUtils.setField(exchangeRateDao, "findBySourceCurrencyAndTargetCurrency",
-				"findBySourceCurrencyAndTargetCurrency");
+		ReflectionTestUtils.setField(exchangeRateDao, "findExchangeRatesByEffectiveDate",
+				"findExchangeRatesByEffectiveDate");
 
 		// Act
 		mockJdbcTemplateQuery(expectedExchangeRates);
 
 		// Assert
-		List<ExchangeRate> actualExchangeRates = exchangeRateDao.findBySourceCurrencyAndTargetCurrency(sourceCurrency,
-				targetCurrency);
+		List<ExchangeRate> actualExchangeRates = exchangeRateDao.findExchangeRatesByEffectiveDate(effectiveStartDate);
 		assertEquals(expectedExchangeRates, actualExchangeRates);
-	}
-
-	private ExchangeRate createExchangeRate() {
-		return ExchangeRate.builder().id(1L).sourceCurrency("USD").targetCurrency("EUR")
-				.exchangeRate(new BigDecimal(0.56)).effectiveStartDate(new Date()).build();
-	}
-
-	private List<ExchangeRate> createExchangeRateList() {
-		return Arrays.asList(new ExchangeRate(1L, "USD", "EUR", new BigDecimal("1.2"), new Date()),
-				new ExchangeRate(2L, "USD", "EUR", new BigDecimal("1.3"), new Date()));
 	}
 
 	private void mockJdbcTemplateUpdate() {
@@ -141,6 +113,11 @@ class JdbcExchangeRateDaoImplTest {
 
 	private void mockJdbcTemplateQuery(List<ExchangeRate> expectedExchangeRates) {
 		when(jdbcTemplate.query(Mockito.anyString(), ArgumentMatchers.<MapSqlParameterSource>any(),
+				ArgumentMatchers.<RowMapper<ExchangeRate>>any())).thenReturn(expectedExchangeRates);
+	}
+	
+	private void mockJdbcTemplateQuery(ExchangeRate expectedExchangeRates) {
+		when(jdbcTemplate.queryForObject(Mockito.anyString(), ArgumentMatchers.<MapSqlParameterSource>any(),
 				ArgumentMatchers.<RowMapper<ExchangeRate>>any())).thenReturn(expectedExchangeRates);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -18,21 +19,19 @@ public class JdbcExchangeRateDaoImpl implements ExchangeRateDao {
 	private final NamedParameterJdbcTemplate jdbcTemplate;
 	private final String upsertQry;
 	private final String deleteQry;
-	private final String findAllQry;
-	private final String findBySourceCurrencyAndTargetCurrencyAndEffectiveDate;
-	private final String findBySourceCurrencyAndTargetCurrency;
+	private final String findExchangeRate;
+	private final String findExchangeRatesByEffectiveDate;
 
 	public JdbcExchangeRateDaoImpl(NamedParameterJdbcTemplate jdbcTemplate,
-			@Value("${exchangeRate.upsert}") String upsertQry, @Value("${exchangeRate.delete}") String deleteQry,
-			@Value("${exchangeRate.findAll}") String findAllQry,
-			@Value("${exchangeRate.findBySourceCurrencyAndTargetCurrencyAndEffectiveDate}") String findBySourceCurrencyAndTargetCurrencyAndEffectiveDate,
-			@Value("${exchangeRate.findBySourceCurrencyAndTargetCurrency}") String findBySourceCurrencyAndTargetCurrency) {
+			@Value("${exchangeRate.upsert}") String upsertQry, 
+			@Value("${exchangeRate.delete}") String deleteQry,
+			@Value("${exchangeRate.findExchangeRate}") String findExchangeRate,
+			@Value("${exchangeRate.findExchangeRatesByEffectiveDate}") String findExchangeRatesByEffectiveDate) {
 		this.jdbcTemplate = jdbcTemplate;
 		this.upsertQry = upsertQry;
 		this.deleteQry = deleteQry;
-		this.findAllQry = findAllQry;
-		this.findBySourceCurrencyAndTargetCurrencyAndEffectiveDate = findBySourceCurrencyAndTargetCurrencyAndEffectiveDate;
-		this.findBySourceCurrencyAndTargetCurrency = findBySourceCurrencyAndTargetCurrency;
+		this.findExchangeRate = findExchangeRate;
+		this.findExchangeRatesByEffectiveDate = findExchangeRatesByEffectiveDate;
 	}
 
 	@Override
@@ -55,28 +54,36 @@ public class JdbcExchangeRateDaoImpl implements ExchangeRateDao {
 						rs.getBigDecimal(ExchangeRateFieldDefinition.EXCHANGE_RATE),
 						rs.getDate(ExchangeRateFieldDefinition.EFFECTIVE_START_DATE)));
 	}
-
-	@Override
-	public List<ExchangeRate> findAll() {
-		return queryExchangeRates(findAllQry, new MapSqlParameterSource());
+	
+	private ExchangeRate queryExchangeRate(String query, MapSqlParameterSource parameterSource) {
+		return jdbcTemplate.queryForObject(query, parameterSource,
+				(rs, rowNum) -> new ExchangeRate(rs.getLong(ExchangeRateFieldDefinition.ID),
+						rs.getString(ExchangeRateFieldDefinition.SOURCE_CURRENCY),
+						rs.getString(ExchangeRateFieldDefinition.TARGET_CURRENCY),
+						rs.getBigDecimal(ExchangeRateFieldDefinition.EXCHANGE_RATE),
+						rs.getDate(ExchangeRateFieldDefinition.EFFECTIVE_START_DATE)));
 	}
 
 	@Override
-	public List<ExchangeRate> findBySourceCurrencyAndTargetCurrencyAndEffectiveDate(String sourceCurrency,
+	public ExchangeRate findExchangeRate(String sourceCurrency,
 			String targetCurrency, Date effectiveStartDate) {
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 		parameterSource.addValue(ExchangeRateFieldDefinition.SOURCE_CURRENCY, sourceCurrency);
 		parameterSource.addValue(ExchangeRateFieldDefinition.TARGET_CURRENCY, targetCurrency);
 		parameterSource.addValue(ExchangeRateFieldDefinition.EFFECTIVE_START_DATE, effectiveStartDate);
-		return queryExchangeRates(findBySourceCurrencyAndTargetCurrencyAndEffectiveDate, parameterSource);
+		
+		try {
+			return queryExchangeRate(findExchangeRate, parameterSource);
+		} catch (EmptyResultDataAccessException ex) {
+			return null;
+		}
 	}
 
 	@Override
-	public List<ExchangeRate> findBySourceCurrencyAndTargetCurrency(String sourceCurrency, String targetCurrency) {
+	public List<ExchangeRate> findExchangeRatesByEffectiveDate(Date effectiveStartDate) {
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-		parameterSource.addValue(ExchangeRateFieldDefinition.SOURCE_CURRENCY, sourceCurrency);
-		parameterSource.addValue(ExchangeRateFieldDefinition.TARGET_CURRENCY, targetCurrency);
-		return queryExchangeRates(findBySourceCurrencyAndTargetCurrency, parameterSource);
+		parameterSource.addValue(ExchangeRateFieldDefinition.EFFECTIVE_START_DATE, effectiveStartDate);
+		return queryExchangeRates(findExchangeRatesByEffectiveDate, parameterSource);
 	}
 
 	private MapSqlParameterSource createParameterSource(ExchangeRate exchangeRate) {

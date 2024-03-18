@@ -1,2 +1,3 @@
 com/bandrango/exchangerate/crud/dao/impl/JdbcExchangeRateDaoImplTest.class
 com/bandrango/exchangerate/crud/service/impl/ExchangeRateServiceRepositoryImplTest.class
+com/bandrango/exchangerate/crud/dao/impl/util/ExchangeRateUtlis.class

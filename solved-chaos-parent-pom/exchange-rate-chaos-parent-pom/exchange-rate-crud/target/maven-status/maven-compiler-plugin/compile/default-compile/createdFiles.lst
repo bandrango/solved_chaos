@@ -6,4 +6,3 @@ com/bandrango/exchangerate/crud/service/ExchangeRateServiceRepository.class
 com/bandrango/exchangerate/crud/beans/ExchangeRate$ExchangeRateBuilder.class
 com/bandrango/exchangerate/crud/beans/ExchangeRate.class
 com/bandrango/exchangerate/crud/dao/ExchangeRateDao.class
-com/bandrango/exchangerate/crud/beans/ExchangeRate$1.class

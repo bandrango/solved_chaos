@@ -11,7 +11,7 @@
 	<name>Store main springboot</name>
 	<description>Store main springboot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>

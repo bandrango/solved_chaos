@@ -32,37 +32,25 @@ public interface ExchangeRateDao {
 	public int deleteExchangeRate(Long id);
 
 	/**
-	 * Retrieves all exchange rates from the system.
-	 *
-	 * @return A list of ExchangeRate objects representing all exchange rates in the
-	 *         system.
-	 * @Transactional(readOnly = true)
-	 */
-	@Transactional(readOnly = true)
-	public List<ExchangeRate> findAll();
-
-	/**
-	 * Retrieves a list of exchange rates based on the source currency, target
+	 * Retrieves a exchange rate based on the source currency, target
 	 * currency, and effective start date.
 	 *
 	 * @param sourceCurrency     The source currency code.
 	 * @param targetCurrency     The target currency code.
 	 * @param effectiveStartDate The effective start date for the exchange rates.
-	 * @return A list of ExchangeRate objects that match the specified criteria.
+	 * @return A ExchangeRate object that match the specified criteria.
 	 */
 	@Transactional(readOnly = true)
-	public List<ExchangeRate> findBySourceCurrencyAndTargetCurrencyAndEffectiveDate(String sourceCurrency,
-			String targetCurrency, Date effectiveStartDate);
+	public ExchangeRate findExchangeRate(String sourceCurrency, String targetCurrency, Date effectiveStartDate);
 
 	/**
 	 * Retrieves a list of exchange rates based on the source currency, target
 	 * currency, and effective start date.
 	 *
-	 * @param sourceCurrency The source currency code.
-	 * @param targetCurrency The target currency code.
+	 * @param effectiveStartDate The effective start date for the exchange rates.
 	 * @return A list of ExchangeRate objects that match the specified criteria.
 	 */
 	@Transactional(readOnly = true)
-	public List<ExchangeRate> findBySourceCurrencyAndTargetCurrency(String sourceCurrency, String targetCurrency);
+	public List<ExchangeRate> findExchangeRatesByEffectiveDate( Date effectiveStartDate);
 
 }

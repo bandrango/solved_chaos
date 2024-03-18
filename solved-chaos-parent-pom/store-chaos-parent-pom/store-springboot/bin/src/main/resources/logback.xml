@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+	<springProperty scope="context" name="logdirectory" source="log.directory"/>
+	<springProperty scope="context" name="logfilename" source="log.filename"/>
+	<springProperty scope="context" name="logmode" source="log.mode"/>
+	<springProperty scope="context" name="chaosmode" source="log.chaosmode"/>
+	<springProperty scope="context" name="appname" source="spring.application.name"/>
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logdirectory}/${logfilename}
+		</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logdirectory}/${logfilename}.%d{yyyy-MM-dd}.%i
+			</FileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>1MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n
+			</pattern>
+		</encoder>
+
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{ISO8601} %-5p [%t] - %m%n</Pattern>
+		</layout>
+
+	</appender>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	    <encoder>
+	        <pattern>%d{ISO8601} ${appname} %-5p [%t] - %m%n</pattern>
+	    </encoder>
+	</appender>
+
+	<logger name="com.bandrango" level="${chaosmode}" additivity="false">
+        <appender-ref ref="STDOUT"/>
+		<appender-ref ref="FILE"/>
+    </logger>
+
+    <root level="${logmode}">
+    	<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+
+</configuration>

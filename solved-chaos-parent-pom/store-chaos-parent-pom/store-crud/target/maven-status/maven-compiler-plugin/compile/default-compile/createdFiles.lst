@@ -1,0 +1,16 @@
+com/bandrango/store/crud/beans/Product$ProductBuilderImpl.class
+com/bandrango/store/crud/service/CustomerServiceRepository.class
+com/bandrango/store/crud/dao/impl/JdbcProductDaoImpl.class
+com/bandrango/store/crud/service/impl/ProductServiceRepositoryImpl.class
+com/bandrango/store/crud/service/impl/CustomerServiceRepositoryImpl.class
+com/bandrango/store/crud/beans/Customer$CustomerBuilderImpl.class
+com/bandrango/store/crud/beans/Product$ProductBuilder.class
+com/bandrango/store/crud/dao/ProductFieldDefinition.class
+com/bandrango/store/crud/dao/impl/JdbcCustomerDaoImpl.class
+com/bandrango/store/crud/dao/CustomerFieldDefinition.class
+com/bandrango/store/crud/beans/Product.class
+com/bandrango/store/crud/service/ProductServiceRepository.class
+com/bandrango/store/crud/dao/ProductDao.class
+com/bandrango/store/crud/dao/CustomerDao.class
+com/bandrango/store/crud/beans/Customer.class
+com/bandrango/store/crud/beans/Customer$CustomerBuilder.class

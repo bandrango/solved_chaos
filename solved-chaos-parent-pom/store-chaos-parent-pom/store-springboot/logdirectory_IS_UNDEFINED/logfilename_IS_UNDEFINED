@@ -1,0 +1,32 @@
+2024-01-04 00:29:25,026 DEBUG [HikariPool-1 housekeeper] - HikariPool-1 - Before cleanup stats (total=10, active=0, idle=10, waiting=0)
+2024-01-04 00:29:25,030 DEBUG [HikariPool-1 housekeeper] - HikariPool-1 - After cleanup  stats (total=10, active=0, idle=10, waiting=0)
+2024-01-04 00:29:25,030 DEBUG [HikariPool-1 housekeeper] - HikariPool-1 - Fill pool skipped, pool is at sufficient level.
+2024-01-04 00:29:25,503 INFO  [RMI TCP Connection(10)-127.0.0.1] - Application shutdown requested.
+2024-01-04 00:29:25,503 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
+2024-01-04 00:29:25,503 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2a2bb0eb, started on Thu Jan 04 00:28:24 ECT 2024
+2024-01-04 00:29:25,504 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Stopping beans in phase 2147483647
+2024-01-04 00:29:25,505 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Bean 'webServerGracefulShutdown' completed its stop procedure
+2024-01-04 00:29:25,505 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Stopping beans in phase 2147483646
+2024-01-04 00:29:25,509 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Bean 'webServerStartStop' completed its stop procedure
+2024-01-04 00:29:25,510 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Unregistering JMX-exposed beans on shutdown
+2024-01-04 00:29:25,510 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Unregistering JMX-exposed beans
+2024-01-04 00:29:25,510 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Shutting down ExecutorService 'applicationTaskExecutor'
+2024-01-04 00:29:25,510 INFO  [RMI TCP Connection(10)-127.0.0.1] - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-01-04 00:29:25,511 DEBUG [RMI TCP Connection(10)-127.0.0.1] - HHH000031: Closing
+2024-01-04 00:29:25,511 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@4982c14b] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@45fcc0bf]
+2024-01-04 00:29:25,511 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Implicitly destroying ServiceRegistry on de-registration of all child ServiceRegistries
+2024-01-04 00:29:25,512 DEBUG [RMI TCP Connection(10)-127.0.0.1] - Implicitly destroying Boot-strap registry on de-registration of all child ServiceRegistries
+2024-01-04 00:29:25,512 INFO  [RMI TCP Connection(10)-127.0.0.1] - HikariPool-1 - Shutdown initiated...
+2024-01-04 00:29:25,512 DEBUG [RMI TCP Connection(10)-127.0.0.1] - HikariPool-1 - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+2024-01-04 00:29:25,513 DEBUG [HikariPool-1 connection closer] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@cb479a7: (connection evicted)
+2024-01-04 00:29:25,513 DEBUG [HikariPool-1 connection closer] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@2738641: (connection evicted)
+2024-01-04 00:29:25,513 DEBUG [HikariPool-1 connection closer] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@64c12d7: (connection evicted)
+2024-01-04 00:29:25,513 DEBUG [HikariPool-1 connection closer] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@434e8c7a: (connection evicted)
+2024-01-04 00:29:25,513 DEBUG [HikariPool-1 connection closer] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@6c98acf5: (connection evicted)
+2024-01-04 00:29:25,513 DEBUG [HikariPool-1 connection closer] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@72c76ea9: (connection evicted)
+2024-01-04 00:29:25,513 DEBUG [HikariPool-1 connection closer] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@14fb108c: (connection evicted)
+2024-01-04 00:29:25,513 DEBUG [HikariPool-1 connection closer] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@23617335: (connection evicted)
+2024-01-04 00:29:25,513 DEBUG [HikariPool-1 connection closer] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@a378ca8: (connection evicted)
+2024-01-04 00:29:25,513 DEBUG [HikariPool-1 connection closer] - HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@43cc0961: (connection evicted)
+2024-01-04 00:29:25,513 DEBUG [RMI TCP Connection(10)-127.0.0.1] - HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2024-01-04 00:29:25,513 INFO  [RMI TCP Connection(10)-127.0.0.1] - HikariPool-1 - Shutdown completed.

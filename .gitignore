@@ -22,3 +22,43 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+
+# Directorios generados por el sistema de construcción (por ejemplo, Maven o Gradle)
+/target/
+/build/
+
+# Configuración específica de la IDE (por ejemplo, IntelliJ o Eclipse)
+/.idea/
+/.vscode/
+/.classpath
+/.project
+
+# Logs y archivos temporales
+*.log
+*.log.*
+*.tmp
+
+# Archivos de configuración específicos de la aplicación (por ejemplo, application.properties)
+/src/main/resources/application*.properties
+
+# Archivos generados durante la ejecución (por ejemplo, logs, archivos de caché)
+/logs/
+/cached/
+
+# Dependencias de Maven (si usas Maven como sistema de construcción)
+/.m2/
+
+# Archivos de respaldo (pueden ser específicos de tu IDE)
+*~
+
+# Archivos de salida de Gradle (si usas Gradle como sistema de construcción)
+/out/
+
+# Archivos específicos de sistema operativo
+.DS_Store
+Thumbs.db
+
+
+
+615572

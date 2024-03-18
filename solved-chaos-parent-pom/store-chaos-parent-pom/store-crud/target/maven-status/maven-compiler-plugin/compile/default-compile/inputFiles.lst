@@ -1,0 +1,12 @@
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/service/impl/ProductServiceRepositoryImpl.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/service/ProductServiceRepository.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/dao/impl/JdbcProductDaoImpl.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/service/CustomerServiceRepository.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/dao/ProductFieldDefinition.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/beans/Customer.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/dao/impl/JdbcCustomerDaoImpl.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/service/impl/CustomerServiceRepositoryImpl.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/dao/CustomerDao.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/dao/ProductDao.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/beans/Product.java
+/Users/bandrango01/eclipse-workspace/solved-chaos-parent-pom/store-chaos-parent-pom/store-crud/src/main/java/com/bandrango/store/crud/dao/CustomerFieldDefinition.java

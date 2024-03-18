@@ -1,0 +1,4 @@
+com/bandrango/store/crud/dao/impl/JdbcCustomerDaoImplTest.class
+com/bandrango/store/crud/dao/impl/JdbcProductDaoImplTest.class
+com/bandrango/store/crud/service/impl/ProductServiceRepositoryImplTest.class
+com/bandrango/store/crud/service/impl/CustomerServiceRepositoryImplTest.class

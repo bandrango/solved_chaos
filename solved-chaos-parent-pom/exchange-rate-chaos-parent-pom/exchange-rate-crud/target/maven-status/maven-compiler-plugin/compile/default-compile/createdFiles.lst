@@ -1,0 +1,8 @@
+com/bandrango/exchangerate/crud/dao/ExchangeRateFieldDefinition.class
+com/bandrango/exchangerate/crud/dao/impl/JdbcExchangeRateDaoImpl.class
+com/bandrango/exchangerate/crud/service/impl/ExchangeRateServiceRepositoryImpl.class
+com/bandrango/exchangerate/crud/beans/ExchangeRate$ExchangeRateBuilderImpl.class
+com/bandrango/exchangerate/crud/service/ExchangeRateServiceRepository.class
+com/bandrango/exchangerate/crud/beans/ExchangeRate$ExchangeRateBuilder.class
+com/bandrango/exchangerate/crud/beans/ExchangeRate.class
+com/bandrango/exchangerate/crud/dao/ExchangeRateDao.class
